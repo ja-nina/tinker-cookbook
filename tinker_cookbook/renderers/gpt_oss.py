@@ -246,9 +246,6 @@ class GptOssRenderer(Renderer):
         # Internal system role renders as actual "system" without transformation
         if role == self._INTERNAL_SYSTEM_ROLE:
             role = "system"
-        # User-provided "system" messages map to "developer" (per HF template)
-        elif role == "system":
-            role = "developer"
 
         header_str = f"<|start|>{role}"
         output_str = ""
