@@ -277,7 +277,8 @@ class GptOssRenderer(Renderer):
                 # Final channel (Response Content)
                 output_str += f"<|channel|>final<|message|>{text_content}"
         elif message["role"] == "system":
-            output_str += f"<|message|>{ensure_text(message['content'])}"
+            # User-provided system messages get "# Instructions" wrapper (rendered as developer)
+            output_str += f"<|message|># Instructions\n\n{ensure_text(message['content'])}\n\n"
         else:
             # user, developer, internal system, and other roles: plain content
             output_str += f"<|message|>{ensure_text(message['content'])}"
